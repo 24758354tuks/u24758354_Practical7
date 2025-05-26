@@ -1,0 +1,43 @@
+﻿@model List<u24758354_Practical.Models.Publication>
+@using u24758354_Practical.Models
+@{
+    ViewBag.Title = "Publications";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@item.Image" class="card-img-top" alt="Publication image">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Type</h6>
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">
+                            <strong>by @item.Author.AuthorName</strong><br />
+                            @item.Summary
+                        </p>
+                        <a href="@item.Link" target="_blank">Read more</a>
+                    </div>
+                    <div class="card-footer">
+                        @if (item is Book book)
+                        {
+                            <small class="text-muted">
+                                First publication date is @book.Date()<br />
+                                Number of editions is @book.Editions()
+                            </small>
+                        }
+                        else
+                        {
+                            if (item is Article article)
+                            {
+                                <small class="text-muted">The date of publication is @article.Date() </small>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
